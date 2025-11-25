@@ -66,25 +66,13 @@ def show_subscription_request(message, name):
 @bot.callback_query_handler(func=lambda call: call.data == "check")
 def check(call):
     if check_sub(call.from_user.id):
-        bot.answer_callback_query(call.id, "✅ Отлично! Вот твой список фильмов! Приятного просмотра!")
+        bot.answer_callback_query(call.id, "✅ Доступ открыт!")
         send_films(call.message.chat.id)
     else:
-        bot.answer_callback_query(call.id, "❌ Ты еще не подписался на канал!")
+        bot.answer_callback_query(call.id, "❌ Сначала подпишись!")
 
-# 📨 Отправка фильмов
 def send_films(chat_id):
-    markup = types.InlineKeyboardMarkup()
-    btn = types.InlineKeyboardButton("📺 ПЕРЕЙТИ В КАНАЛ", url=f"https://t.me/{CHANNEL[1:]}")
-    markup.add(btn)
-    
-    bot.send_message(chat_id, FILMS, reply_markup=markup)
-    print(f"✅ Выдали фильмы пользователю {chat_id}")
+    bot.send_message(chat_id, FILMS)
 
-# 🏃 Запуск бота
-print("🚀 Кино-бот запущен!")
-while True:
-    try:
-        bot.polling(none_stop=True, interval=0)
-    except Exception as e:
-        print(f"🔧 Перезапуск: {e}")
-        time.sleep(10)
+print("🚀 Бот запущен!")
+bot.polling(none_stop=True, skip_pending=True)
