@@ -15,7 +15,7 @@ def home():
 TOKEN = os.environ['BOT_TOKEN']
 bot = telebot.TeleBot(TOKEN)
 
-CHANNEL = "@bot_shook"  # ⚠️ ЗАМЕНИ НА СВОЙ КАНАЛ!
+CHANNEL = "@kinoshook"  # ⚠️ ЗАМЕНИ НА СВОЙ КАНАЛ!
 
 FILMS = """🎬 ВАШ СПИСОК ФИЛЬМОВ:
 
